@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Alike+Angular&display=swap');
+
+
+body {
+    margin: 0;
+    font-family: "Alike Angular", serif;
+    max-width: 100%;
+    overflow-x: hidden !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+/* Nav  */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #7a90a4;
+    height: 5rem;
+    width: 100%;
+}
+
+/* Burger menu  */
+
+.burger-menu {
+    cursor: pointer;
+    display: none;
+    z-index: 10000;
+}
+.burger-icon{
+    width: 2rem;
+    height: 2rem;
+    transition: opacity 0.3s ease-in-out;
+    position: relative;
+    left: 0.8rem;
+}
+.close-icon {
+    opacity: 0;
+    width: 2rem;
+    height: 2rem;
+    transition: opacity 0.3s ease-in-out;
+    position: relative;
+    right: 0.8rem;
+}
+.menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 150px;
+    height: 100vh;
+    background: #f1f1f1;
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.menu ul {
+    padding: 0;
+    list-style: none;
+}
+.menu li {
+    padding: 20px;
+}
+.menu-open .menu {
+    right: 0;
+}
+.menu-open .burger-icon {
+    opacity: 0;
+}
+.menu-open .close-icon {
+    opacity: 1;
+}
+svg{
+    fill: white;
+}
+
+
+.menu-links{
+    display: flex;
+    gap: 1rem;
+    margin-right: 2rem;
+}
+.menu-links a{
+    color: white;
+}
+
+
+div.logo img {
+    width: 10rem;
+}
+
+
+
+
+/* Principal Screen  */
+
+.principal-screen {
+    width: 100%;
+    height: 70vh; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.principal-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("./pev-electricite-tableau-electrique-loire.jpg") no-repeat center / cover;
+    opacity: 0.5; 
+    z-index: -1; 
+}
+
+.text-principal-screen{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.text-principal-screen button{
+    width: 10rem;
+    height: 3rem;
+    background-color: #137c8b   ;
+    border: none;
+    border-radius: 0.5rem;
+    color: rgb(255, 255, 255);
+}
+
+.mosaiques{
+    position: relative;
+    top: 27.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mosaique-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+.image img {
+    width: 100%;
+    height: auto;
+    max-width: 650px;
+    max-height: 300px;
+    min-height: 190px;
+    object-fit: cover;
+}
+
+.image{
+    display: flex;
+}
+
+.mosaiques button{
+    width: 10rem;
+    height: 3rem;
+    background-color: #137c8b   ;
+    border: none;
+    border-radius: 0.5rem;
+    color: rgb(255, 255, 255);
+    margin: 5rem;
+}
+
+
+
+
+
+/* footer  */
+
+footer{
+    position: relative;
+    top: 10rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: #444444;
+    color: white;
+    align-items: center;
+    padding-left: 2rem;
+    padding-right: 2rem; 
+    width: 96%;
+}
+
+
+/* Form */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(232, 232, 232);
+    width: 50%;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    margin-top: 5rem;
+}
+form input, form textarea {
+    width: 80%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    border: 1px solid rgb(232, 232, 232);
+    border-radius: 0.2rem;
+    background-color: whitesmoke;
+    resize: vertical; /* Permet uniquement le redimensionnement vertical */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+form input:focus, form textarea:focus {
+    outline: none;
+    border: 1px solid #137c8b;
+}
+form button{
+    width: 75%;
+    border: none;
+    background-color: #2e2e2e;
+    color: rgb(229, 229, 229);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+
+
+/* fleche remonte */
+
+#scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #b4b4b4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+#scrollTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+}
+#scrollTopBtn:hover {
+    transform: scale(1.1);
+}
+#scrollTopBtn svg{
+    width: 1.5rem;
+    position: relative;
+    top: 0.2rem;
+}
+
+
+
+
+
+/* grid */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    width: 45rem;
+}
+.grid img {
+    width: 100%;
+    height: auto;
+}
+
+ .grid img:nth-of-type(2) {
+    height: 18.4rem;
+    width: 30rem;
+    object-fit: cover;
+    position: relative;
+    right: 8rem;
+}
+.grid img:nth-of-type(1) {
+    height: 18.4rem;
+    width: auto;
+}
+
+@media (max-width: 426px) {
+    .burger-menu {
+        display: block;
+    }
+    div.logo img {
+        width: 7rem;
+    }
+    .menu{
+        z-index: 1000;
+    }
+    .menu-links {
+        display: none;
+    }
+    .text-principal-screen{
+        font-size: 1rem;
+    }
+    .image{
+        display: none;
+    }
+    h2{
+        font-size: 1rem;
+        font-weight: bold;
+        
+    }
+    h3{
+        font-size: 0.8rem;
+        font-weight: 100;
+    }
+    footer{
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .text{
+        margin: 0.5rem;
+        background-color: whitesmoke;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .grid {
+        display: flex;
+        flex-direction: column;
+        width: 10rem;
+    }
+
+    .grid img {
+        width: 10rem;
+        height: auto;
+        max-width: 100%;
+        object-fit: cover;
+        position: relative;
+        right: 0;
+        left: 0;
+    }
+}
