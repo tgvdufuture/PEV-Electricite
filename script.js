@@ -45,12 +45,15 @@ const burgerMenu = document.querySelector('.burger-menu');
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
-            // Envoi de l'email
-            emailjs.send("cRNrr9oBnRnO29dcR", "NCEKSGkJlS1HUDS2o7Att", {
+            // Création du message formaté
+            const formattedMessage = `${message}`;
+
+            // Envoi de l'email via EmailJS
+            emailjs.send("service_ox72fyx", "template_wjhq78i", {
                 name: name,
                 phone: phone,
-                email: email,
-                message: message
+                mail: email, // Assurez-vous que le champ est nommé "mail" dans votre modèle EmailJS
+                message: formattedMessage
             })
             .then(function(response) {
                 console.log('SUCCESS!', response.status, response.text);
@@ -60,3 +63,8 @@ const burgerMenu = document.querySelector('.burger-menu');
                 alert('Échec de l\'envoi du message.');
             });
         });
+
+        // Initialisation d'EmailJS avec la clé publique correcte
+        (function(){
+            emailjs.init("cRNrr9oBnRnO29dcR"); // Remplacez par votre nouvelle clé publique
+        })();
