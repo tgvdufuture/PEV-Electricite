@@ -35,3 +35,28 @@ const burgerMenu = document.querySelector('.burger-menu');
 
             requestAnimationFrame(scroll);
         }
+
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            // Récupération des valeurs des champs
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Envoi de l'email
+            emailjs.send("cRNrr9oBnRnO29dcR", "NCEKSGkJlS1HUDS2o7Att", {
+                name: name,
+                phone: phone,
+                email: email,
+                message: message
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Message envoyé avec succès !');
+            }, function(error) {
+                console.log('FAILED...', error);
+                alert('Échec de l\'envoi du message.');
+            });
+        });

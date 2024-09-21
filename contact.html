@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>PEV Electricité - Contact</title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // Remplacez par votre user_id
+        })();
+    </script>
 </head>
 <body>
     <nav>
@@ -44,7 +50,7 @@
         pev.electricite@outlook.com<br>
     </h3>
 
-    <form action="">
+    <form id="contactForm" action="">
         <label for="name">Nom / Prénom</label>
         <input type="text" id="name" name="name" placeholder="">
         <label for="phone">Numéro de Téléphone</label>
