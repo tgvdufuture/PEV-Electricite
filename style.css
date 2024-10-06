@@ -104,11 +104,11 @@ div.logo img {
 .principal-screen {
     width: 100%;
     height: 70vh; 
-    position: absolute; 
+    position: relative; /* Changement de absolute à relative pour éviter le débordement */
     top: 0;
     left: 0;
     right: 0;
-    z-index: -1000;
+    z-index: 1; /* Changement de -1000 à 1 pour s'assurer que l'élément est au-dessus des autres */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,37 +116,32 @@ div.logo img {
     color: white;
 }
 
-.principal-screen::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("./pev-electricite-tableau-electrique-loire.jpg") no-repeat center / cover;
-    opacity: 0.5; 
-    z-index: -1; 
-}
-
-.text-principal-screen{
+.text-principal-screen {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 1.5rem;
 }
 
-.text-principal-screen button{
+.text-principal-screen a {
+    cursor: pointer;
+    z-index: 2; /* Changement de 10 à 2 pour éviter les conflits avec le z-index de .principal-screen */
+}
+
+.text-principal-screen button {
     width: 10rem;
     height: 3rem;
-    background-color: #137c8b   ;
+    background-color: #137c8b;
     border: none;
     border-radius: 0.5rem;
     color: rgb(255, 255, 255);
+    cursor: pointer;
+    z-index: 2; /* Changement de 10 à 2 pour éviter les conflits avec le z-index de .principal-screen */
 }
 
 .mosaiques{
     position: relative;
-    top: 27.35rem;
+    top: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,6 +167,10 @@ div.logo img {
     display: flex;
 }
 
+.mosaiques a{
+    margin: 5rem;
+}
+
 .mosaiques button{
     width: 10rem;
     height: 3rem;
@@ -179,7 +178,7 @@ div.logo img {
     border: none;
     border-radius: 0.5rem;
     color: rgb(255, 255, 255);
-    margin: 5rem;
+    cursor: pointer;
 }
 
 
@@ -190,7 +189,7 @@ div.logo img {
 
 footer{
     position: relative;
-    top: 10rem;
+    top: 8rem !important;
     display: flex;
     justify-content: space-between;
     background-color: #444444;

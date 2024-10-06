@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé des actions des utilisateurs</title>
+    <link rel="stylesheet" href="tableau-bord.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Résumé des actions des utilisateurs</h1>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Page visitée</th>
+                <th>Temps passé (min)</th>
+                <th>Clics</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <canvas id="visitorsChart" width="400" height="200"></canvas>
+    <label for="timeFrame">Choisir la période :</label>
+    <select id="timeFrame">
+        <option value="daily">Journalière</option>
+        <option value="weekly">Hebdomadaire</option>
+        <option value="monthly">Mensuelle</option>
+    </select>
+
+    <script>
+        const userData = JSON.parse(localStorage.getItem('userData')) || { pages: {}, uniqueVisitors: {} };
+        console.log('Données utilisateur chargées :', userData);
+
+        function populateTable() {
+            const tbody = document.querySelector('#userTable tbody');
+            tbody.innerHTML = ''; // Réinitialiser le contenu du tableau
+            for (const [page, { timeSpent = 0, clickCount = 0 }] of Object.entries(userData.pages)) {
+                const row = `<tr>
+                    <td>${page}</td>
+                    <td>${timeSpent}</td>
+                    <td>${clickCount}</td>
+                </tr>`;
+                tbody.insertAdjacentHTML('beforeend', row);
+            }
+        }
+
+        populateTable();
+
+        let visitorsChart;
+
+        function drawVisitorsChart(timeFrame) {
+            const ctx = document.getElementById('visitorsChart').getContext('2d');
+            const uniqueVisitors = userData.uniqueVisitors || {};
+            const data = { labels: [], data: [] };
+
+            const groupData = (timeFrame) => {
+                const groupedData = {};
+                for (const date in uniqueVisitors) {
+                    const key = timeFrame === 'daily' ? date : new Date(date).toISOString().split(timeFrame === 'weekly' ? 'W' : 'T')[0];
+                    groupedData[key] = (groupedData[key] || 0) + uniqueVisitors[date];
+                }
+                return groupedData;
+            };
+
+            const grouped = groupData(timeFrame);
+            data.labels = Object.keys(grouped);
+            data.data = Object.values(grouped);
+
+            if (!data.labels.length || !data.data.length) {
+                console.error('Aucune donnée à afficher dans le graphique.');
+                return;
+            }
+
+            if (visitorsChart) visitorsChart.destroy();
+
+            visitorsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Visiteurs uniques',
+                        data: data.data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        document.getElementById('timeFrame').addEventListener('change', (e) => drawVisitorsChart(e.target.value));
+        if (Object.keys(userData.uniqueVisitors).length) drawVisitorsChart('daily');
+    </script>
+</body>
+</html>
